@@ -5,7 +5,7 @@
 
 Name:           python-sqlalchemy
 Version:        0.5.5
-Release:        2.1%{?dist}
+Release:        3%{?dist}
 Summary:        Modular and flexible ORM library for python
 
 Group:          Development/Libraries
@@ -13,6 +13,16 @@ License:        MIT
 URL:            http://www.sqlalchemy.org/
 Source0:        http://pypi.python.org/packages/source/S/%{srcname}/%{srcname}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+# Fix building the package against python 2.6.6 by supplying expected
+# profiling results in the selftests for running under 2.6.6
+# (see rhbz#665533)
+Patch0: tweak-expected-profile-for-python-2.6.6.patch
+
+# CVE-2012-0805: sanitize inputs to limit() and offset()
+# Backported to 0.5.5 from
+#   http://www.sqlalchemy.org/trac/changeset/852b6a1a87e7/
+Patch1: SQLAlchemy-0.5.5-coerce-limit-offset-to-int.patch
 
 BuildArch:      noarch
 BuildRequires:  python-devel
@@ -30,6 +40,8 @@ domain.
 
 %prep
 %setup -q -n %{srcname}-%{version}
+%patch0 -p1
+%patch1 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
@@ -57,6 +69,10 @@ nosetests
 %{python_sitelib}/*
 
 %changelog
+* Sat Jan 28 2012 David Malcolm <dmalcolm@redhat.com> - 0.5.5-3
+- sanitize inputs to limit() and offset()
+Resolves: CVE-2012-0805
+
 * Mon Nov 30 2009 Dennis Gregorovic <dgregor@redhat.com> - 0.5.5-2.1
 - Rebuilt for RHEL 6
 
