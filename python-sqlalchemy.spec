@@ -18,7 +18,7 @@
 
 Name:           python-sqlalchemy
 Version:        0.9.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Modular and flexible ORM library for python
 
 Group:          Development/Libraries
@@ -46,8 +46,8 @@ BuildRequires:  python3-nose
 %endif
 
 %description
-SQLAlchemy is an Object Relational Mappper (ORM) that provides a flexible,
-high-level interface to SQL databases.  Database and domain concepts are
+SQLAlchemy is an Object Relational Mapper (ORM) that provides a flexible,
+high-level interface to SQL databases. Database and domain concepts are
 decoupled, allowing both sides maximum flexibility and power. SQLAlchemy
 provides a powerful mapping layer that can work as automatically or as manually
 as you choose, determining relationships based on foreign keys or letting you
@@ -62,8 +62,8 @@ Summary:        Modular and flexible ORM library for python
 Group:          Development/Libraries
 
 %description -n python3-sqlalchemy
-SQLAlchemy is an Object Relational Mappper (ORM) that provides a flexible,
-high-level interface to SQL databases.  Database and domain concepts are
+SQLAlchemy is an Object Relational Mapper (ORM) that provides a flexible,
+high-level interface to SQL databases. Database and domain concepts are
 decoupled, allowing both sides maximum flexibility and power. SQLAlchemy
 provides a powerful mapping layer that can work as automatically or as manually
 as you choose, determining relationships based on foreign keys or letting you
@@ -140,9 +140,9 @@ popd
 %endif # with_python3
 
 %changelog
-* Thu Aug 13 2015 Scientific Linux Auto Patch Process <SCIENTIFIC-LINUX-DEVEL@LISTSERV.FNAL.GOV>
-- Eliminated rpmbuild "bogus date" error due to inconsistent weekday,
-  by assuming the date is correct and changing the weekday.
+* Tue Mar 1 2016 Charalampos Stratakis <cstratak@redhat.com> - 0.9.8-2
+- Fixed description typos
+Resolves: rhbz#1263756
 
 * Wed May 20 2015 Matej Stuchlik <mstuchli@redhat.com> - 0.9.8-1
 - Update to 0.9.8
